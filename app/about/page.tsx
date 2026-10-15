@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import Divider from "../components/Divider";
+
+export const metadata: Metadata = {
+  title: "Destinee, Licensed Esthetician in Hanford, CA",
+  description:
+    "Meet Destinee, the licensed esthetician behind Radiantly Bare in downtown Hanford, CA. Brazilian waxing specialist offering bikini waxing, brows, and lash lifts.",
+  alternates: { canonical: "/about" },
+  openGraph: { siteName: "Radiantly Bare", url: "/about", images: ["/images/portrait_1.webp"] },
+};
 
 export default function AboutPage() {
   return (
@@ -7,7 +17,7 @@ export default function AboutPage() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <h1
-            className="mb-10"
+            className="mb-10 text-balance"
             style={{
               fontFamily: "var(--font-playfair)",
               color: "#a27946",
@@ -15,7 +25,7 @@ export default function AboutPage() {
               fontWeight: 600,
             }}
           >
-            A Little Bit About Me
+            Meet Destinee, Licensed Esthetician in Hanford, CA
           </h1>
 
           {/* Mobile: column / Desktop: row — text left, portrait right */}
@@ -52,7 +62,7 @@ export default function AboutPage() {
               >
                 <Image
                   src="/images/portrait_1.webp"
-                  alt="Destinee, founder of Radiantlybare"
+                  alt="Destinee, licensed esthetician and owner of Radiantly Bare in Hanford, CA"
                   fill
                   sizes="260px"
                   loading="eager"
@@ -65,7 +75,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Divider ── */}
-      <div className="mx-6" style={{ borderTop: "1px solid #363c1f" }} />
+      <Divider />
 
       {/* ── Cancellation Policy ── */}
       <section className="pt-20 pb-60 px-6 bg-white">
@@ -99,7 +109,7 @@ export default function AboutPage() {
           >
             <Image
               src="/images/lobby.webp"
-              alt="Radiantlybare studio lobby"
+              alt="Radiantly Bare studio lobby in downtown Hanford, CA"
               fill
               sizes="(max-width: 640px) 100vw, 576px"
               style={{ objectFit: "cover" }}

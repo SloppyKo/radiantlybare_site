@@ -1,15 +1,17 @@
 import Image from "next/image";
+import Divider from "./Divider";
+import { PHONE_DISPLAY, PHONE_E164 } from "../lib/site";
 
 export default function Footer() {
   return (
     <footer className="bg-white">
-      <div className="mx-6 border-t" style={{ borderColor: "#363c1f" }} />
+      <Divider />
       <div className="mx-auto max-w-5xl px-6 pt-10 pb-8">
         {/* Logo centered above columns */}
         <div className="flex justify-center mb-10">
           <Image
             src="/images/logo.PNG"
-            alt="Radiantlybare"
+            alt="Radiantly Bare"
             width={160}
             height={64}
             style={{ height: "auto", width: "140px" }}
@@ -29,12 +31,20 @@ export default function Footer() {
               href="https://maps.google.com/?q=116+N+Irwin+St,+Hanford,+CA+93230"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm leading-relaxed transition-colors hover:text-[#a27946]"
-              style={{ fontFamily: "var(--font-libre)", color: "#363c1f", textDecoration: "underline" }}
+              className="text-sm leading-relaxed text-[#363c1f] transition-colors hover:text-[#a27946]"
+              style={{ fontFamily: "var(--font-libre)", textDecoration: "underline" }}
             >
               116 N Irwin St
               <br />
               Hanford, CA 93230
+            </a>
+            <br />
+            <a
+              href={`tel:${PHONE_E164}`}
+              className="text-sm leading-relaxed text-[#363c1f] transition-colors hover:text-[#a27946]"
+              style={{ fontFamily: "var(--font-libre)", textDecoration: "underline" }}
+            >
+              {PHONE_DISPLAY}
             </a>
           </div>
 
@@ -72,8 +82,8 @@ export default function Footer() {
                 href="https://www.facebook.com/radiantlybare/?_rdr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm transition-colors hover:text-[#a27946]"
-                style={{ fontFamily: "var(--font-libre)", color: "#363c1f", textDecoration: "underline" }}
+                className="text-sm text-[#363c1f] transition-colors hover:text-[#a27946]"
+                style={{ fontFamily: "var(--font-libre)", textDecoration: "underline" }}
               >
                 Facebook
               </a>
@@ -81,8 +91,8 @@ export default function Footer() {
                 href="https://www.instagram.com/radiantlybare"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm transition-colors hover:text-[#a27946]"
-                style={{ fontFamily: "var(--font-libre)", color: "#363c1f", textDecoration: "underline" }}
+                className="text-sm text-[#363c1f] transition-colors hover:text-[#a27946]"
+                style={{ fontFamily: "var(--font-libre)", textDecoration: "underline" }}
               >
                 Instagram
               </a>
@@ -107,7 +117,7 @@ export default function Footer() {
           />
         </a>
         <p style={{ fontSize: "0.55rem", color: "#9ca3af", letterSpacing: "0.04em", textAlign: "center" }}>
-          Built by SloppyKo. Creative Studio © 2026 All rights reserved&nbsp;&nbsp;|&nbsp;&nbsp;0.0.0&nbsp;&nbsp;|&nbsp;&nbsp;June 17, 2026
+          © 2026 Radiantly Bare. All rights reserved&nbsp;&nbsp;|&nbsp;&nbsp;Built by SloppyKo. Creative Studio
         </p>
       </div>
     </footer>

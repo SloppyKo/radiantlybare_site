@@ -3,6 +3,8 @@ import { Playfair_Display, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import BackToTop from "./components/BackToTop";
+import { SITE_URL, jsonLd } from "./lib/site";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -19,9 +21,21 @@ const libreBaskerville = Libre_Baskerville({
 });
 
 export const metadata: Metadata = {
-  title: "Radiantlybare | Wax & Skincare Studio | Hanford, CA",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Brazilian Waxing in Hanford, CA | Radiantly Bare",
+    template: "%s | Radiantly Bare",
+  },
   description:
-    "Professional waxing and skincare services in downtown Hanford, California. Brazilian waxing, eyebrow lamination, lash lifts, and more.",
+    "Welcoming, licensed esthetician in downtown Hanford, CA specializing in Brazilian and bikini waxing, brow lamination, and lash lifts. Book online today.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: "Radiantly Bare",
+    locale: "en_US",
+    url: "/",
+    images: [{ url: "/images/home_hero.webp", alt: "Radiantly Bare waxing studio in Hanford, CA" }],
+  },
 };
 
 export default function RootLayout({
@@ -35,9 +49,17 @@ export default function RootLayout({
       className={`${playfair.variable} ${libreBaskerville.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <Header />
-        <main className="flex-1">{children}</main>
+        {/* Reserves space for the fixed header */}
+        <main className="flex-1" style={{ paddingTop: "104px" }}>{children}</main>
         <Footer />
+        <BackToTop />
       </body>
     </html>
   );

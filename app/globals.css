@@ -1,26 +1,35 @@
 @import "tailwindcss";
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* Divider colors: `border-divider` for section/footer lines, `border-rule` for Services list rows */
+@theme {
+  --color-divider: #f1ede6;
+  --color-rule: #e5e0d6;
 }
 
-body {
-  background-color: #ffffff;
-  color: #415e07;
-  font-family: var(--font-libre), Georgia, serif;
-}
+/* Base styles live in the base layer so Tailwind utilities (text colors, hover states) can override them */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-playfair), Georgia, serif;
-  color: #a27946;
-  font-weight: 600;
-}
+  body {
+    background-color: #ffffff;
+    color: #415e07;
+    font-family: var(--font-libre), Georgia, serif;
+  }
 
-a {
-  text-decoration: none;
-  color: inherit;
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-playfair), Georgia, serif;
+    color: #a27946;
+    font-weight: 600;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }

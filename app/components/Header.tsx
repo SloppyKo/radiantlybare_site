@@ -2,31 +2,44 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const GLOSSGENIUS_URL = "https://radiantlybare.glossgenius.com/services";
+import { GLOSSGENIUS_URL } from "../lib/site";
 
 const navLinks = [
   { label: "Portfolio", href: "/portfolio", external: false },
-  { label: "Services", href: GLOSSGENIUS_URL, external: true },
+  { label: "Services", href: "/services", external: false },
   { label: "About", href: "/about", external: false },
 ];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-white">
-      <div className="mx-auto max-w-5xl px-6 flex items-center justify-between" style={{ height: "104px" }}>
+    // Fixed (not sticky) so shrinking never shifts page layout; layout.tsx reserves the full 104px.
+    <header className="fixed top-0 inset-x-0 z-50 bg-white">
+      <div
+        className="mx-auto max-w-5xl px-6 flex items-center justify-between transition-[height] duration-300 ease-out"
+        style={{ height: scrolled ? "72px" : "104px" }}
+      >
         {/* Logo */}
         <Link href="/" onClick={() => setMobileOpen(false)}>
           <Image
             src="/images/logo.PNG"
-            alt="Radiantlybare"
+            alt="Radiantly Bare"
             width={400}
             height={200}
             loading="eager"
-            style={{ height: "auto", width: "115px" }}
+            className="transition-[width] duration-300 ease-out"
+            style={{ height: "auto", width: scrolled ? "84px" : "115px" }}
           />
         </Link>
 
@@ -39,8 +52,8 @@ export default function Header() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-base transition-colors hover:text-[#a27946]"
-                style={{ fontFamily: "var(--font-playfair)", color: "#363c1f" }}
+                className="text-base text-[#363c1f] transition-colors hover:text-[#a27946]"
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 {label}
               </a>
@@ -48,8 +61,8 @@ export default function Header() {
               <Link
                 key={label}
                 href={href}
-                className="text-base transition-colors hover:text-[#a27946]"
-                style={{ fontFamily: "var(--font-playfair)", color: "#363c1f" }}
+                className="text-base text-[#363c1f] transition-colors hover:text-[#a27946]"
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 {label}
               </Link>
@@ -111,14 +124,10 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Header divider */}
-      <div className="mx-6 border-t" style={{ borderColor: "#363c1f" }} />
-
       {/* Mobile dropdown */}
       {mobileOpen && (
         <nav
-          className="sm:hidden bg-white px-6 py-5 flex flex-col gap-5 border-b"
-          style={{ borderColor: "#363c1f" }}
+          className="sm:hidden bg-white px-6 py-5 flex flex-col gap-5 border-b border-divider"
         >
           {navLinks.map(({ label, href, external }) =>
             external ? (

@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from "react";
 
 type Props = { categories: { id: string; title: string }[] };
 
+// One color for pill border and text (fills on hover/active with white text)
+const PILL_COLOR = "#a27946";
+
 // Sticky sub-header: pins under the shrunken header (72px) and highlights the section in view.
 export default function ServiceNav({ categories }: Props) {
   const sentinelRef = useRef<HTMLDivElement>(null);
@@ -63,12 +66,12 @@ export default function ServiceNav({ categories }: Props) {
                 }}
                 href={`#${cat.id}`}
                 aria-current={isActive ? "true" : undefined}
-                className={`shrink-0 whitespace-nowrap text-sm transition-colors duration-300 hover:bg-[#a27946] hover:text-white ${
-                  isActive ? "bg-[#a27946] text-white" : "text-[#a27946]"
-                }`}
+                className="shrink-0 whitespace-nowrap text-sm transition-colors duration-300 hover:!bg-[#a27946] hover:!text-white"
                 style={{
                   fontFamily: "var(--font-playfair)",
-                  border: "1px solid #a27946",
+                  color: isActive ? "#ffffff" : PILL_COLOR,
+                  backgroundColor: isActive ? PILL_COLOR : "transparent",
+                  border: `1px solid ${PILL_COLOR}`,
                   borderRadius: "999px",
                   padding: "0.45rem 1.1rem",
                   textDecoration: "none",
